@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- Setting up Spring Boot as project parent -->
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.2.0.M4</version>
+
+		<relativePath />
+	</parent>
+
+	<groupId>com.locationguru.csf.automation</groupId>
+	<artifactId>java-testing-reference</artifactId>
+	<version>1.0-SNAPSHOT</version>
+
+	<!-- This module will be packaged as POM -->
+	<packaging>pom</packaging>
+
+	<name>Java Testing Reference</name>
+	<description>A reference project for demonstrating automated testing with JUnit</description>
+
+	<!-- Project modules -->
+	<modules>
+		<module>spring-boot-mvc</module>
+	</modules>
+
+	<!-- Project properties -->
+	<properties>
+
+		<!-- Logging -->
+		<log4j.version>2.12.0</log4j.version>
+		<lmax.version>3.4.2</lmax.version>
+		<slf4j.version>1.7.26</slf4j.version>
+
+		<!-- Apache commons -->
+		<apache.commons-lang.version>3.9</apache.commons-lang.version>
+		<apache.commons-text.version>1.6</apache.commons-text.version>
+		<apache.http-client.version>4.5.9</apache.http-client.version>
+
+		<!-- Frameworks -->
+		<spring.framework.version>5.2.0.M3</spring.framework.version>
+		<hibernate.validator.version>6.0.17.Final</hibernate.validator.version>
+
+		<!-- Byte code generation -->
+		<byte-buddy.version>1.9.13</byte-buddy.version>
+
+		<!-- Serialization / Deserialization -->
+		<jackson.version>2.9.9</jackson.version>
+		<jakarta.xml-bind.version>2.3.2</jakarta.xml-bind.version>
+
+		<!-- Database -->
+		<postgresql.jdbc.version>42.2.6</postgresql.jdbc.version>
+		<hikaricp.version>3.3.1</hikaricp.version>
+		<flyway.version>5.2.4</flyway.version>
+
+		<!-- Persistence -->
+		<hibernate.orm.version>5.4.3.Final</hibernate.orm.version>
+
+		<!-- Spring boot overrides -->
+		<log4j2.version>${log4j.version}</log4j2.version>
+		<spring.version>${spring.framework.version}</spring.version>
+		<hibernate.version>${hibernate.orm.version}</hibernate.version>
+		<hibernate-validator.version>${hibernate.validator.version}</hibernate-validator.version>
+		<jakarta-xml-bind.version>${jakarta.xml-bind.version}</jakarta-xml-bind.version>
+		<postgresql.version>${postgresql.jdbc.version}</postgresql.version>
+		<commons-lang3.version>${apache.commons-lang.version}</commons-lang3.version>
+		<httpclient.version>${apache.http-client.version}</httpclient.version>
+		<junit-jupiter.version>${junit.jupiter.version}</junit-jupiter.version>
+
+		<!-- Spring boot plugin overrides -->
+		<maven-compiler-plugin.version>${maven.compiler-plugin.version}</maven-compiler-plugin.version>
+		<maven-surefire-plugin.version>${maven.surefire-plugin.version}</maven-surefire-plugin.version>
+
+		<!-- Plugins -->
+		<maven.compiler-plugin.version>3.8.1</maven.compiler-plugin.version>
+		<maven.surefire-plugin.version>2.22.2</maven.surefire-plugin.version>
+
+		<!-- Testing -->
+		<junit.jupiter.version>5.5.0</junit.jupiter.version>
+
+		<!-- Application servers -->
+		<tomcat.version>9.0.21</tomcat.version>
+
+		<!-- Compiler -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<java.version>12</java.version>
+		<maven.compiler.source>${java.version}</maven.compiler.source>
+		<maven.compiler.target>${java.version}</maven.compiler.target>
+
+		<scala.version>2.13.0</scala.version>
+
+	</properties>
+
+	<!-- Managed dependencies -->
+
+	<dependencyManagement>
+		<dependencies>
+
+			<!-- Logging -->
+
+			<dependency>
+				<groupId>com.lmax</groupId>
+				<artifactId>disruptor</artifactId>
+				<version>${lmax.version}</version>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
+
+</project>
