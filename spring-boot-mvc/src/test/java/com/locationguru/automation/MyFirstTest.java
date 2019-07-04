@@ -1,12 +1,12 @@
 package com.locationguru.automation;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 public class MyFirstTest
 {
 	@Test
-	void testAddition()
+	@DisplayName("Sum of integers")
+	void testIntegerAddition()
 	{
 		final int sum = 2 + 2;
 
