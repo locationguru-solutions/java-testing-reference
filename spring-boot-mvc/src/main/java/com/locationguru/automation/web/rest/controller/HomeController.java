@@ -1,8 +1,6 @@
 package com.locationguru.automation.web.rest.controller;
 
-import java.util.Date;
-import java.util.List;
-
+import com.locationguru.automation.model.User;
 import com.locationguru.csf.web.rest.model.Response;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,9 +15,15 @@ public class HomeController
 	private static final Logger logger = LogManager.getLogger(HomeController.class);
 
 	@GetMapping(value = "/home", produces = { MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<Response<Date>> get()
+	public ResponseEntity<Response<User>> get()
 	{
-		return ResponseEntity.ok(Response.ok(List.of(new Date(), new Date(), new Date())));
+		final User user = new User();
+
+		user.setIdentity("neo");
+		user.setFirstName("Thomas");
+		user.setLastName("Anderson");
+
+		return ResponseEntity.ok(Response.ok(user));
 	}
 
 }
