@@ -75,8 +75,7 @@ public class UserService
 	@Transactional
 	public void delete(final UUID uid)
 	{
-		final Long customerId = 1L;
-		final User user = repository.findByUid(customerId, uid);
+		final User user = findById(uid);
 
 		if (user == null)
 		{

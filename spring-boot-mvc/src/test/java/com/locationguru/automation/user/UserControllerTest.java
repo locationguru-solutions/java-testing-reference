@@ -1,83 +1,57 @@
 package com.locationguru.automation.user;
 
-import java.util.List;
+import java.util.UUID;
 
 import com.locationguru.automation.model.User;
 import com.locationguru.automation.service.UserService;
+import com.locationguru.automation.web.rest.controller.UserController;
 import com.locationguru.csf.base.AbstractControllerTest;
+import com.locationguru.csf.web.mvc.EntityService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.jupiter.api.*;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.ResultActions;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 @AutoConfigureMockMvc
 public class UserControllerTest
-		extends AbstractControllerTest
+		extends AbstractControllerTest<User, User, User, UUID>
 {
 	private static final Logger logger = LogManager.getLogger(UserControllerTest.class);
 
-	private final MockMvc mvc;
+	private final UserGenerator userGenerator;
 
 	@MockBean
 	private UserService userService;
 
 	@Autowired
-	public UserControllerTest(final MockMvc mvc)
+	public UserControllerTest(final MockMvc mvc, final UserGenerator userGenerator)
 	{
-		this.mvc = mvc;
+		super(mvc, UserController.class, User::getUid);
+		this.userGenerator = userGenerator;
 	}
 
-	@BeforeAll
-	public static void initializeAll()
+	@Override
+	protected void validateEntity(final ResultActions result, final String prefix, final User user) throws Exception
 	{
-
+		result.andExpect(jsonPath(prefix + ".identity").value(user.getIdentity()))
+			  .andExpect(jsonPath(prefix + ".firstName").value(user.getFirstName()))
+			  .andExpect(jsonPath(prefix + ".lastName").value(user.getLastName()));
 	}
 
-	@BeforeEach
-	public void initialize()
+	@Override
+	protected User newEntity()
 	{
-		// this.mvc = MockMvcBuilders.webAppContextSetup(wac).build();
+		return userGenerator.newEntity();
 	}
 
-	@Test
-	@DisplayName("User creation")
-	public void testCreateUser() throws Exception
+	@Override
+	protected EntityService<User, User, UUID> getEntityService()
 	{
-		logger.info("User creation successful ..");
-
-		final User user = new User();
-
-		user.setIdentity("neo");
-		user.setFirstName("Thomas");
-		user.setLastName("Anderson");
-
-		Mockito.when(userService.findAll()).thenReturn(List.of(user));
-
-		mvc.perform(MockMvcRequestBuilders.get("/users"))
-		   .andExpect(MockMvcResultMatchers.status().isOk())
-		   .andExpect(content().contentType("application/json"))
-		   .andExpect(jsonPath("$.results[0].identity").value("neo"));
+		return userService;
 	}
-
-	@AfterEach
-	public void destroy()
-	{
-
-	}
-
-	@AfterAll
-	public static void destroyAll()
-	{
-
-	}
-
 }
