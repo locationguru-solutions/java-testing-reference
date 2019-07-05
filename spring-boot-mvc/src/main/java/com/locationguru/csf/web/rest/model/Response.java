@@ -142,4 +142,15 @@ public class Response<T>
 	{
 		this.results = results;
 	}
+
+	@Override
+	public String toString()
+	{
+		return "Response{" +
+					   "code='" + code + '\'' +
+					   ", message='" + message + '\'' +
+					   ", result=" + result +
+					   ", results=" + results +
+					   '}';
+	}
 }

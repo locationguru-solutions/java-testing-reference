@@ -168,4 +168,22 @@ public class User
 	{
 		this.version = version;
 	}
+
+	@Override
+	public String toString()
+	{
+		return "User{" +
+					   "id=" + id +
+					   ", uid=" + uid +
+					   ", customerId=" + customerId +
+					   ", identity='" + identity + '\'' +
+					   ", firstName='" + firstName + '\'' +
+					   ", lastName='" + lastName + '\'' +
+					   ", isActive=" + isActive +
+					   ", creationTimestamp=" + creationTimestamp +
+					   ", updateTimestamp=" + updateTimestamp +
+					   ", deletionTimestamp=" + deletionTimestamp +
+					   ", version=" + version +
+					   '}';
+	}
 }

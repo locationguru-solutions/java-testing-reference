@@ -96,7 +96,9 @@ public class UserService
 	@Override
 	public void copy(final User source, final User destination)
 	{
-
+		destination.setIdentity(source.getIdentity());
+		destination.setFirstName(source.getFirstName());
+		destination.setLastName(source.getLastName());
 	}
 
 	@Override
